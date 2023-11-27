@@ -8,7 +8,7 @@ df = pd.read_pickle("../../data/interim/data_processed.pkl")
 # Group columns by machine
 ambient_columns = [
     col for col in df.columns if col.startswith('AmbientConditions')]
-machine_columns = [col for col in df.columns if 'Machine' in col]
+machine_columns = [col for col in df.columns if col.startswith('Machine')]
 stage1_output_columns = [col for col in df.columns if 'Stage1.Output' in col]
 
 
@@ -34,8 +34,35 @@ def plot_columns(columns, title):
     plt.legend(loc="best")
     plt.show()
 
+# function to extract properties from machine columns
+
+
+def get_machine_properties(machine_columns):
+    properties = set()
+    for col in machine_columns:
+        prop = ".".join(col.split(".")[1:])
+        properties.add(prop)
+    return properties
+
+
+machine_properties = get_machine_properties(machine_columns)
+
+
+def plot_machine_columns(properties, title):
+    for prop in properties:
+        plt.figure(figsize=(15, 6))
+        for machine in range(1, 4):
+            col = f'Machine{machine}.{prop}'
+            sns.lineplot(data=df, x=df.index, y=col, label=col)
+
+        plt.title(f'{title}: {prop}')
+        plt.xlabel('Time')
+        plt.ylabel('Value')
+        plt.legend(loc="best")
+        plt.show()
+
 
 # Plot for each group
 plot_columns(ambient_columns, 'Ambient Conditions')
-plot_columns(df, machine_columns, 'Machine Columns')
+plot_machine_columns(machine_properties, 'Machine Properties')
 plot_columns(df, stage1_output_columns, 'Stage1 Output Columns')
