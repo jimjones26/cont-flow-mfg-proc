@@ -9,6 +9,8 @@ df = pd.read_pickle("../../data/interim/data_processed.pkl")
 ambient_columns = [
     col for col in df.columns if col.startswith('AmbientConditions')]
 machine_columns = [col for col in df.columns if col.startswith('Machine')]
+combiner_columns = [col for col in df.columns if col.startswith(
+    'FirstStage.CombinerOperation')]
 stage1_output_columns = [col for col in df.columns if 'Stage1.Output' in col]
 
 
@@ -65,4 +67,5 @@ def plot_machine_columns(properties, title):
 # Plot for each group
 plot_columns(ambient_columns, 'Ambient Conditions')
 plot_machine_columns(machine_properties, 'Machine Properties')
+plot_columns(combiner_columns, 'First Stage Combiner Operation')
 plot_columns(df, stage1_output_columns, 'Stage1 Output Columns')
