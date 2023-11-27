@@ -14,19 +14,16 @@ stage1_output_columns = [col for col in df.columns if 'Stage1.Output' in col]
 
 def plot_columns(columns, title):
     """
-    This function creates line plots for the specified columns of a DataFrame.
+    Creates line plots for specified DataFrame columns.
 
-    It iterates over the provided columns and for each column, it creates a line plot 
-    using seaborn's lineplot function. The x-axis represents the DataFrame's index 
-    (assumed to be time in this context), and the y-axis represents the values of the column.
-
-    Each plot is labeled with the column's name and a legend is created. 
-    The plots are displayed with a specified title.
+    Iterates over columns, creating a line plot for each using seaborn's lineplot function. 
+    The x-axis is the DataFrame's index (assumed to be time), and the y-axis is the column values. 
+    Each plot is labeled with the column's name and a title is displayed.
 
     Parameters:
-    df (pandas.DataFrame): The DataFrame to plot.
-    columns (list): The list of column names to create plots for.
-    title (str): The title for the plots.
+    df (pandas.DataFrame): DataFrame to plot.
+    columns (list): Column names to plot.
+    title (str): Title for the plots.
     """
     plt.figure(figsize=(20, 5))
     for column in columns:
