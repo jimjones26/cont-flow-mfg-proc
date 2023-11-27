@@ -11,7 +11,7 @@ ambient_columns = [
 machine_columns = [col for col in df.columns if col.startswith('Machine')]
 combiner_columns = [col for col in df.columns if col.startswith(
     'FirstStage.CombinerOperation')]
-stage1_output_columns = [col for col in df.columns if 'Stage1.Output' in col]
+stage_output_columns = [col for col in df.columns if 'Stage1.Output' in col]
 
 
 def plot_columns(columns, title):
@@ -63,9 +63,23 @@ def plot_machine_columns(properties, title):
         plt.legend(loc="best")
         plt.show()
 
+# function to create indivisual line plots for each column
+
+
+def plot_individual_columns(columns, title):
+    for column in columns:
+        plt.figure(figsize=(15, 6))
+        sns.lineplot(data=df, x=df.index, y=column, label=column)
+
+        plt.title(f'{title}: {column}')
+        plt.xlabel('Time')
+        plt.ylabel('Value')
+        plt.legend(loc="best")
+        plt.show()
+
 
 # Plot for each group
 plot_columns(ambient_columns, 'Ambient Conditions')
 plot_machine_columns(machine_properties, 'Machine Properties')
 plot_columns(combiner_columns, 'First Stage Combiner Operation')
-plot_columns(df, stage1_output_columns, 'Stage1 Output Columns')
+plot_individual_columns(stage_output_columns, 'Stage1 Output Measurement')
