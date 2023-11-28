@@ -35,10 +35,12 @@ def clean_series(series, window_size=15, std_dev=3):
 
 
 cleaned_series = clean_series(
-    df["Stage1.Output.Measurement0.U.Actual"], window_size=100)
+    df["Stage1.Output.Measurement0.U.Actual"], window_size=100
+)
 
 cleaned_series.plot()
 
 df["Stage1.Output.Measurement0.U.Actual"] = cleaned_series
 
 df["Stage1.Output.Measurement0.U.Actual"].plot()
+df = df.iloc[:, :42]
