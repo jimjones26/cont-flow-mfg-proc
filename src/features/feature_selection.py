@@ -31,11 +31,11 @@ def select_best_features(df, target_column, k=10):
     return best_features
 
 
-best_features = select_best_features(df, "Stage1.Output.Measurement0.U.Actual", k=10)
-best_features.columns
+best_features_df = select_best_features(df, "Stage1.Output.Measurement0.U.Actual")
+best_features_df.columns
 
-best_features.to_pickle("../../data/processed/best_features.pkl")
+best_features_df.to_pickle("../../data/processed/best_features.pkl")
 
 best_features_df = pd.concat(
-    [best_features, df["Stage1.Output.Measurement0.U.Actual"]], axis=1
+    [best_features_df, df["Stage1.Output.Measurement0.U.Actual"]], axis=1
 )
