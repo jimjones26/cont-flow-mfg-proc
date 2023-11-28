@@ -35,3 +35,7 @@ best_features = select_best_features(df, "Stage1.Output.Measurement0.U.Actual", 
 best_features.columns
 
 best_features.to_pickle("../../data/processed/best_features.pkl")
+
+best_features_df = pd.concat(
+    [best_features, df["Stage1.Output.Measurement0.U.Actual"]], axis=1
+)
