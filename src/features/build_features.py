@@ -9,15 +9,15 @@ df["Stage1.Output.Measurement0.U.Actual"].plot()
 
 def clean_series(series, window_size=15, std_dev=3):
     """
-    Removes outliers from a pandas Series and fills missing values with linear interpolation.
+    Cleans a pandas Series by removing outliers and zero values, then fills missing values.
 
     Parameters:
-    series (pandas.Series): The series to clean.
-    window_size (int): The size of the window for the rolling mean and standard deviation calculations.
-    std_dev (float): The number of standard deviations from the mean to consider an outlier.
+    series (pandas.Series): Series to clean.
+    window_size (int): Window size for rolling calculations.
+    std_dev (float): Standard deviation threshold for outliers.
 
     Returns:
-    pandas.Series: The cleaned series.
+    pandas.Series: Cleaned series.
     """
     rolling_mean = series.rolling(window=window_size).mean()
     rolling_std = series.rolling(window=window_size).std()
