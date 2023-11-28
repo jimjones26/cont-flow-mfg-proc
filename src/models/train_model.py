@@ -36,16 +36,18 @@ df.info()
 
 def experiment_models(df, target_column, test_size=0.2, random_state=42):
     """
-    Experiments with different models to predict the target column.
+    Experiments with different ML models to predict a target variable.
+    Splits the DataFrame into training and testing sets, trains models, makes predictions, and evaluates performance.
+    Performance metrics are mean absolute error and r2 score, which are printed and visualized with line plots.
 
     Parameters:
-    df (pandas.DataFrame): The DataFrame to use.
-    target_column (str): The name of the target column.
-    test_size (float): The proportion of the dataset to include in the test split.
-    random_state (int): The seed used by the random number generator.
+    df (pandas.DataFrame): DataFrame with features and target.
+    target_column (str): Target column name.
+    test_size (float, optional): Proportion of data for test split. Default is 0.2.
+    random_state (int, optional): Seed for random number generator in train-test split. Default is 42.
 
     Returns:
-    None
+    None. Outputs performance metrics and line plots.
     """
     # Split the data into training and testing sets
     X = df.drop(target_column, axis=1)
